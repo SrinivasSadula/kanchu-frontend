@@ -1,0 +1,60 @@
+<div class="product-detail-container" *ngIf="product; else loading">
+  <div class="breadcrumb">
+    <a routerLink="/products">Products</a> / <span>Product Details</span>
+  </div>
+
+  <div class="product-detail">
+    <div class="product-image">
+      <img [src]="product?.image" [alt]="product?.name" />
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product?.name }}</h1>
+      
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="reviews">(42 reviews)</span>
+      </div>
+
+      <div class="product-price">
+        <span class="price">₹{{ product?.price }}</span>
+      </div>
+
+      <div class="product-material">
+        <strong>Material:</strong> {{ product?.material }}
+      </div>
+
+      <div class="product-description">
+        <h3>Description</h3>
+        <p>{{ product?.description }}</p>
+      </div>
+
+      <div class="product-actions">
+        <div class="quantity-selector">
+          <button (click)="decreaseQuantity()" class="qty-btn">-</button>
+          <span class="quantity-display">{{ quantity }}</span>
+          <button (click)="increaseQuantity()" class="qty-btn">+</button>
+        </div>
+        <button class="btn btn-primary btn-lg" (click)="addToCart()">
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="product-features">
+        <h3>Features</h3>
+        <ul>
+          <li>Handcrafted with premium materials</li>
+          <li>Eco-friendly production</li>
+          <li>Fast and secure shipping</li>
+          <li>30-day return policy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    Loading product details...
+  </div>
+</ng-template>

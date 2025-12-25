@@ -1,1 +1,25 @@
-<p>products works!</p>
+<div class="products-container">
+  <h2>Our Artisan Products</h2>
+  
+  <div *ngIf="loading$ | async" class="loading-message">
+    <p>Loading products...</p>
+  </div>
+
+  <div *ngIf="error$ | async as errorMsg" class="error-message">
+    <p>{{ errorMsg }}</p>
+  </div>
+
+  <div class="products-grid">
+    <div *ngFor="let product of products$ | async" class="product-card">
+      <img [src]="product.image" [alt]="product.name" class="product-image" />
+      <h3 class="product-name">{{ product.name }}</h3>
+      <p class="product-material"><strong>Material:</strong> {{ product.material }}</p>
+      <p class="product-price"><strong>Price:</strong> ₹{{ product.price }}</p>
+      <a [routerLink]="['/products', product.id]" class="btn-details">View Details</a>
+    </div>
+  </div>
+
+  <div *ngIf="(loading$ | async) === false && (products$ | async)?.length === 0 && !(error$ | async)" class="no-products">
+    <p>No products available at the moment.</p>
+  </div>
+</div>

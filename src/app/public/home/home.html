@@ -1,1 +1,32 @@
-<p>home works!</p>
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to KANCHU.IN</h1>
+      <p>Premium Artisan Products Marketplace</p>
+      <div class="hero-buttons">
+        <a routerLink="/products" class="btn btn-primary">Shop Now</a>
+        <a routerLink="/contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2>Why Choose Us?</h2>
+    <div class="features-grid">
+      <div *ngFor="let feature of features" class="feature-card">
+        <div class="feature-icon">{{ feature.icon }}</div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <h2>Ready to Explore?</h2>
+    <p>Discover our exclusive collection of handcrafted artisan products</p>
+    <a routerLink="/products" class="btn btn-primary btn-lg">Browse Products</a>
+  </section>
+</div>

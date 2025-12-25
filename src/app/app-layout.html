@@ -1,0 +1,32 @@
+<header class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        🧧 KANCHU.IN
+      </a>
+    </div>
+
+    <nav class="navbar-menu">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Home
+      </a>
+      <a routerLink="/products" routerLinkActive="active">
+        Products
+      </a>
+      <a routerLink="/contact" routerLinkActive="active">
+        Contact
+      </a>
+      <a routerLink="/admin/dashboard" routerLinkActive="active">
+        Admin
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2025 KANCHU.IN - Premium Artisan Products. All rights reserved.</p>
+</footer>

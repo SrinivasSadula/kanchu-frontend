@@ -1,1 +1,80 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="login-box">
+    <div class="login-header">
+      <h1>🧧 KANCHU.IN</h1>
+      <p>Admin Login</p>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="success" class="alert alert-success">
+      ✓ {{ success }}
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="alert alert-error">
+      ✗ {{ error }}
+    </div>
+
+    <form (ngSubmit)="login()" class="login-form">
+      <!-- Email Input -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="admin@kanchu.in"
+          [disabled]="loading"
+          required
+        />
+      </div>
+
+      <!-- Password Input -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-input-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Enter your password"
+            [disabled]="loading"
+            required
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            [disabled]="loading"
+          >
+            {{ showPassword ? '👁️‍🗨️' : '👁️' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="btn btn-login" [disabled]="loading || !email || !password">
+        <span *ngIf="!loading">Login</span>
+        <span *ngIf="loading">
+          <span class="spinner"></span> Logging in...
+        </span>
+      </button>
+    </form>
+
+    <!-- Demo Button -->
+    <div class="demo-section">
+      <p>Demo Account:</p>
+      <button type="button" class="btn btn-demo" (click)="demoLogin()" [disabled]="loading">
+        Use Demo Credentials
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <p>© 2025 KANCHU.IN - Premium Artisan Products</p>
+    </div>
+  </div>
+</div>
+

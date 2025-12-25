@@ -1,0 +1,74 @@
+<div class="manage-container">
+  <div class="header">
+    <h1>Manage Products</h1>
+    <button class="btn btn-primary" (click)="openForm()">+ Add Product</button>
+  </div>
+
+  <div *ngIf="showForm" class="form-modal">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>{{ editingId ? 'Edit' : 'Add' }} Product</h2>
+        <button class="close-btn" (click)="closeForm()">×</button>
+      </div>
+      
+      <form (ngSubmit)="saveProduct()">
+        <div class="form-group">
+          <label>Product Name</label>
+          <input type="text" [(ngModel)]="newProduct.name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label>Material</label>
+          <input type="text" [(ngModel)]="newProduct.material" name="material" required />
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" [(ngModel)]="newProduct.price" name="price" required />
+        </div>
+
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="text" [(ngModel)]="newProduct.image" name="image" required />
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="newProduct.description" name="description" rows="4"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="products-table">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Material</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.material }}</td>
+          <td>₹{{ product.price }}</td>
+          <td class="actions">
+            <button class="btn btn-sm btn-warning" (click)="editProduct(product)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="products.length === 0" class="no-data">No products found. Create one to get started.</p>
+  </div>
+</div>
