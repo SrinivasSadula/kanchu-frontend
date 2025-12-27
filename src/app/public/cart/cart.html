@@ -1,0 +1,55 @@
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>Your Cart</h1>
+    <div class="cart-actions">
+      <a routerLink="/products" class="btn-secondary">Continue shopping</a>
+    </div>
+  </div>
+
+  <div *ngIf="items?.length; else empty" class="cart-body">
+    <div class="cart-list">
+      <div *ngFor="let item of items" class="cart-item">
+        <div class="item-image">
+          <img *ngIf="item.image" [src]="item.image" alt="{{ item.name }}" />
+        </div>
+        <div class="item-info">
+          <div class="item-name">{{ item.name }}</div>
+          <div class="item-price">₹{{ item.price }}</div>
+          <div class="item-qty">
+            <button class="qty-btn" (click)="updateQuantity(item, -1)">-</button>
+            <span class="qty">{{ item.quantity }}</span>
+            <button class="qty-btn" (click)="updateQuantity(item, 1)">+</button>
+          </div>
+        </div>
+        <div class="item-total">₹{{ (item.price || 0) * item.quantity }}</div>
+        <div class="item-remove">
+          <button class="btn-remove" (click)="remove(item.id)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="cart-summary">
+      <div class="summary-row">
+        <span>Items</span>
+        <span>{{ items.length }}</span>
+      </div>
+      <div class="summary-row">
+        <strong>Subtotal</strong>
+        <strong>₹{{ total }}</strong>
+      </div>
+      <div class="summary-actions">
+        <button class="btn-primary">Proceed to Checkout</button>
+        <button class="btn-clear" (click)="cartService.clear()">Clear Cart</button>
+      </div>
+    </aside>
+  </div>
+
+  <ng-template #empty>
+    <div class="cart-empty">
+      <img src="/assets/empty-cart.png" alt="Empty cart" class="empty-img" *ngIf="true" />
+      <h3>Your cart is empty</h3>
+      <p>Find beautiful handmade products on our <a routerLink="/products">products</a> page.</p>
+      <a routerLink="/products" class="btn-primary">Browse Products</a>
+    </div>
+  </ng-template>
+</div>

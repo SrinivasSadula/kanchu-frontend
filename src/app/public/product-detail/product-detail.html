@@ -5,15 +5,31 @@
 
   <div class="product-detail">
     <div class="product-image">
-      <img [src]="product?.image" [alt]="product?.name" />
+      <div class="carousel">
+        <button class="carousel-btn prev" (click)="prevImage()" *ngIf="productImages.length > 1">‹</button>
+        <img [src]="productImages[currentImageIndex] || product?.image" [alt]="product?.name" />
+        <button class="carousel-btn next" (click)="nextImage()" *ngIf="productImages.length > 1">›</button>
+      </div>
+
+      <div class="thumbnails" *ngIf="productImages.length > 1">
+        <img *ngFor="let img of productImages; let i = index"
+             [src]="img"
+             (click)="selectImage(i)"
+             [class.active]="i === currentImageIndex"
+             [alt]="product?.name + ' thumbnail ' + (i+1)" />
+      </div>
     </div>
 
     <div class="product-info">
       <h1>{{ product?.name }}</h1>
       
       <div class="product-rating">
-        <span class="stars">★★★★★</span>
-        <span class="reviews">(42 reviews)</span>
+        <span class="stars">
+          <ng-container *ngFor="let n of [1,2,3,4,5]; let i = index">
+            <span class="star" [class.filled]="i < (product?.rating || 5)">★</span>
+          </ng-container>
+        </span>
+        <span class="reviews">({{ product?.reviews || 0 }} reviews)</span>
       </div>
 
       <div class="product-price">

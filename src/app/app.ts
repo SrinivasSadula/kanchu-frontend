@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CartService } from './core/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,13 @@ import { RouterModule } from '@angular/router';
 export class App {
   protected title = 'kanchu-frontend';
   menuOpen = false;
+  cartCount = 0;
+
+  private cartService = inject(CartService);
+
+  constructor() {
+    this.cartService.items$.subscribe(items => this.cartCount = items.reduce((s, i) => s + i.quantity, 0));
+  }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;

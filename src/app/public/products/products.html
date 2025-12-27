@@ -13,6 +13,14 @@
     <div *ngFor="let product of products$ | async" class="product-card">
       <img [src]="product.image" [alt]="product.name" class="product-image" />
       <h3 class="product-name">{{ product.name }}</h3>
+      <div class="product-rating">
+        <span class="stars">
+          <ng-container *ngFor="let n of [1,2,3,4,5]; let i = index">
+            <span class="star" [class.filled]="i < (product.rating || 5)">★</span>
+          </ng-container>
+        </span>
+        <span class="reviews">({{ product.reviews || 0 }} reviews)</span>
+      </div>
       <p class="product-material"><strong>Material:</strong> {{ product.material }}</p>
       <p class="product-price"><strong>Price:</strong> ₹{{ product.price }}</p>
       <a [routerLink]="['/products', product.id]" class="btn-details">View Details</a>

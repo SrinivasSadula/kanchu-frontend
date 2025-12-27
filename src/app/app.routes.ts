@@ -4,6 +4,7 @@ import { Home } from './public/home/home';
 import { Products } from './public/products/products';
 import { ProductDetail } from './public/product-detail/product-detail';
 import { Contact } from './public/contact/contact';
+import { Cart } from './public/cart/cart';
 import { Login } from './admin/login/login';
 import { Dashboard } from './admin/dashboard/dashboard';
 import { ManageProducts } from './admin/manage-products/manage-products';
@@ -33,6 +34,11 @@ export const routes: Routes = [
     path: 'contact',
     component: Contact,
     data: { title: 'Contact Us - KANCHU.IN' }
+  },
+  {
+    path: 'cart',
+    component: Cart,
+    data: { title: 'Your Cart - KANCHU.IN' }
   },
   {
     path: 'admin',
